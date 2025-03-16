@@ -1,0 +1,22 @@
+{
+  "name": "particle-simulator-web",
+  "version": "1.0.0",
+  "description": "Web interface for particle simulator",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack serve",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "wasm-game-of-life": "file:../pkg/"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "html-webpack-plugin": "^5.5.3",
+    "rimraf": "^5.0.5",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}

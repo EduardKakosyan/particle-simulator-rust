@@ -181,3 +181,62 @@ enum Option<T> {
 
 let maybe_number = Some(5);
 let no_number: Option<i32> = None;
+
+// Functions in Rust modules are private by default and require
+// the pub keyword to export them to other programs. 
+// A program is composed of several parts
+//
+// package/lib/crate/mod
+// variable
+// statement
+// function
+// trail
+// label
+// comment
+
+// Rust checks a set of ownership rules at compile time, 
+// this is different from garbage collection for example
+
+// each value has an owner
+// value have only one owner at any given time
+// when the owner leaves the scope, the value is discarded.
+
+fn main() {
+    let long = 10 // < --- long enters main scope
+
+    { // this is a temp scoe
+        let short = 5; //<--- short enters scope (temp)
+        println!("inner shor: {}", short);
+
+        let long = 3.14; //<--- long enters scope (temp)
+        println!("inner long:{}", long);
+        // note that this long is completely different of the long 
+        // in main scope, it doesn't override the one in the main scope.
+    } // <--- long and short leave scope
+
+    let long = 'a';
+    print!("outer long: {}", long); // <--- long leaves main scope
+}
+
+
+// rust also has the concept of borrow
+// this block is not actually runnable.
+fn main() {
+    let x = "Shieber".to_string(); // create a string
+    let y = x; // move ownership of x to y
+    let x = "Shieber".to_string(); // create a string
+    let y = &x; // borrow x to y 
+    println!("{x}") // x is valid here
+    // borrowin makes y immutable since it simply a reference to the
+    // address space of x.
+    let x = "Shiebar".to_string(); //create a string
+    let y = &mut x; // borrow x mutably usually not recommended
+    y.push_str(", handsome!");
+    // let z = &mut x; // cannot borrow x mutably twice
+    // this avoid racing conditions.
+    let x = "Shiebar".to_string();
+    let y = x.clone(); // clone x
+    println!("{x}, {y}"); // x and y are both valid in this case.
+    // cloning is much slower since it actually creates two copies in memory
+} // <--- y calls drop
+

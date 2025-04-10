@@ -237,6 +237,46 @@ fn main() {
     let x = "Shiebar".to_string();
     let y = x.clone(); // clone x
     println!("{x}, {y}"); // x and y are both valid in this case.
-    // cloning is much slower since it actually creates two copies in memory
+    // cloning is much slower since it actually creates two copies in memory.
+    //
 } // <--- y calls drop
 
+fn add<T>(x: T, y: y) -> T {
+    x + y;
+}
+// generics 
+enum Result<T, E> {
+    Ok(T),// generic type on success
+    Err(E), // generic type on error
+}
+
+// trait is a way to define and restric the behaviour of a generic type,
+// encapsulating the functionality shared by each type. 
+// traid consists of three parts: method, type, and constant.
+
+trait Greete {
+    fn say_hello(&self) {
+        println!("Hello!");
+    }
+}
+
+struct Student {
+    education: i32,
+}
+struct Teacher {
+    teaching: i32,
+    education: i32,
+}
+
+impl Greete for Student {}
+
+impl Greete for Teacher {
+
+    fn say_hello(&self) {
+        println!("Hello, I am teacher")
+    }
+}
+
+fn outer_say_hello<T: Greete>(t: &T) {
+    t.say_hello();
+}

@@ -280,3 +280,46 @@ impl Greete for Teacher {
 fn outer_say_hello<T: Greete>(t: &T) {
     t.say_hello();
 }
+
+enum Cash {
+    One,
+    Two,
+    Five,
+    Ten,
+    Twenty,
+    Hundred,
+}
+
+fn cash_value(cash: Cash) -> u8 {
+    match cash{
+        Cash::One => 1,
+        Cash::Two => 2,
+        Cash::Five => 5,
+        Cash::Ten => 10,
+        other =>  0, // _ -> 0
+    }
+}
+
+// match expression must be exhaustive, meaning it should vocer all possible matching patterns.
+// use if-let matching if you just need 1 possible match
+
+if let Cash::One = cash {
+    print!("cash is one");
+}
+
+// Function programming
+// Clousers are anonymous functions that can be passed as parameters to other functions and capture
+// variables. They can be created in one location and executed in other different contexts.
+//
+
+// define a function
+fn function_name(parameters) -> return_types {
+    code_body;
+    return_value
+}
+
+// define closure
+|parameters| {
+    code_body;
+    return_value
+}

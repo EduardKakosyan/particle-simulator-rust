@@ -322,4 +322,64 @@ fn function_name(parameters) -> return_types {
 |parameters| {
     code_body;
     return_value
+};
+
+let is_even = |x| { 0 == x % 2 };
+let num = 10;
+println!("{num} is even: {}", is_even());
+
+// Rc is used for setting up multiple owners to one reference
+use std::rc::RC;
+fn main() {
+    let one = RC::new(1);
+    let one_1 = one.clone();
+    println!("sc:{}", RC::strong_count(one_1));
+}
+
+// for multi threaded environments we use Arc (atomic reference counting)
+// by default both Rc and Arc don't allow for mutability (internal data modification)
+// use Cell and RefCell for scenarios where modifying internal values is necessary
+// internal mutability in rust allows data modification while having immutable references.
+// Cell is checked at compile time, refcell is checked at runtime, so it should be used carefully.
+//
+// Rust provides Weak pointer which allows for a value to be cleared even if there are circular
+// references.
+//
+
+// Exceptions in rust
+// Option, Result, Panic, and Abort
+
+// Option handles possible exceptions (failure cases) with Some or None.
+// Failure is different from error, as it is expected
+//
+// Result is used to handle recoverable errors and rperesents success or failure (Ok, Err).
+
+use std::fs::File;
+use std::io::ErrorKind;
+
+let f = File::open("kw.txt");
+let f = match f {
+    Ok(file) => file,
+    Err(err) => match err.kind() {
+        ErrorKind::NotFound => match File::create("kw.txt"){
+            Ok(fc) => fc,
+            Err(e) => panic("error while creating the file!"),
+        }
+
+        ErrorKind::PermissionDenied => panic("No Permission!"),
+        _ => panic!("Error while opening file")
+    }
+}
+
+// panic stops the execution of the program and should be used 
+// when there is no other solution.
+// for less verbose methods we can use the following
+//
+
+fn read_from_file() -> Result<String, io::Error> {
+    let f = File::open("kew.txt")?; // if error, throw it
+    let mut s = String::new();
+    f.read_to_string(&mut s);
+
+    Ok(s)
 }

@@ -1,0 +1,117 @@
+# Rust specific
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Debug files
+*.pdb
+*.su
+*.idb
+*.pdb
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build output
+/dist/
+/build/
+/out/
+
+# Dependencies
+/node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+/coverage/
+/target/debug/
+/target/release/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# System Files
+.directory
+*~
+*.bak
+*.swp
+*#
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Documentation
+/docs/_build/
+/docs/_static/
+/docs/_templates/
+
+# Rust specific patterns
+*.rlib
+*.dll
+*.so
+*.dylib
+*.exe
+*.out
+*.app
+
+# Cargo specific
+Cargo.lock
+target/
+**/target/
+
+# Rustfmt
+rustfmt.toml
+
+# Clippy
+clippy.toml
+
+# Rust-analyzer
+rust-project.json
+
+# Generated files
+*.gen.rs
+*.gen.json
+
+# Coverage reports
+*.profraw
+*.gcda
+*.gcno
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# System specific
+.DS_Store
+Thumbs.db
+desktop.ini 

@@ -3,6 +3,7 @@
 mod algorithms;
 
 use algorithms::anagram::{anagram_solution1, anagram_solution2};
+use algorithms::par_checker::{par_checker1, par_checker2, par_checker3};
 use algorithms::stack::Stack;
 
 fn main() {
@@ -34,4 +35,15 @@ fn main() {
 
     println!("Sum: {}", sum1);
     println!("Addend: {}", addend);
+
+    // parenthesis checker with stack
+    let sa = "(2+3){fun}[abc]";
+    let sb = "()((()";
+    // let res1 = par_checker1(sa);
+    let res1 = par_checker2(sa);
+    let res2 = par_checker2(sb);
+    println!("{sa} balanced: {res1}, {sb} balanced:{res2}");
+    let res3 = par_checker3(sa);
+    let res4 = par_checker3(sb);
+    println!("{sa} balanced: {res3}, {sb} balanced:{res4}");
 }

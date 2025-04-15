@@ -3,7 +3,8 @@
 mod algorithms;
 
 use algorithms::anagram::{anagram_solution1, anagram_solution2};
-use algorithms::par_checker::{par_checker1, par_checker2, par_checker3};
+use algorithms::dec_to_binary::{base_converter, dec_to_binary};
+use algorithms::par_checker::par_checker;
 use algorithms::stack::Stack;
 
 fn main() {
@@ -39,11 +40,17 @@ fn main() {
     // parenthesis checker with stack
     let sa = "(2+3){fun}[abc]";
     let sb = "()((()";
-    // let res1 = par_checker1(sa);
-    let res1 = par_checker2(sa);
-    let res2 = par_checker2(sb);
-    println!("{sa} balanced: {res1}, {sb} balanced:{res2}");
-    let res3 = par_checker3(sa);
-    let res4 = par_checker3(sb);
+    let res3 = par_checker(sa);
+    let res4 = par_checker(sb);
     println!("{sa} balanced: {res3}, {sb} balanced:{res4}");
+
+    let num = 100;
+    let bin_str: String = dec_to_binary(num);
+    println!("{num} = b{bin_str}");
+
+    let num1 = 10;
+    let num2 = 43;
+    let bin_str: String = base_converter(num1, 2);
+    let hex_str: String = base_converter(num2, 16);
+    println!("{num1} = b{bin_str}, {num2} = x{hex_str}");
 }

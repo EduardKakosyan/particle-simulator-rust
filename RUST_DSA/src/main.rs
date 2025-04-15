@@ -23,4 +23,15 @@ fn main() {
     for s in string_stack {
         println!("{}", s);
     }
+
+    let mut s = Stack::new();
+    let sum1 = s.iter().sum::<i32>();
+    let mut addend = 0;
+    for item in s.iter_mut() {
+        *item += 1;
+        addend += 1;
+    }
+
+    println!("Sum: {}", sum1);
+    println!("Addend: {}", addend);
 }

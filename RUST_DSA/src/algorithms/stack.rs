@@ -57,25 +57,23 @@ impl<T> Stack<T> {
     }
 
     /// Stack.into_iter() stack is modified and becomes a iterator
-    fn into_iter(self) -> IntoIter<T> {
+    pub fn into_iter(self) -> IntoIter<T> {
         IntoIter(self)
     }
     /// iter: stack unmodofied and get a unmutable iterator
-    fn iter(&self) -> Iter<T> {
+    pub fn iter(&self) -> Iter<T> {
         let mut iterator = Iter { stack: Vec::new() };
         for item in self.data.iter() {
             iterator.stack.push(item);
         }
-
         iterator
     }
     /// iter_mut: stack unmodified and get a mutable iterator
-    fn iter_mut(&mut self) -> IterMut<T> {
+    pub fn iter_mut(&mut self) -> IterMut<T> {
         let mut iterator = IterMut { stack: Vec::new() };
         for item in self.data.iter_mut() {
             iterator.stack.push(item);
         }
-
         iterator
     }
 }
@@ -86,7 +84,7 @@ impl<T> Default for Stack<T> {
     }
 }
 
-struct IntoIter<T>(Stack<T>);
+pub struct IntoIter<T>(Stack<T>);
 impl<T: Clone> Iterator for IntoIter<T> {
     type Item = T;
     fn next(&mut self) -> Option<Self::Item> {
@@ -99,7 +97,7 @@ impl<T: Clone> Iterator for IntoIter<T> {
     }
 }
 
-struct Iter<'a, T: 'a> {
+pub struct Iter<'a, T: 'a> {
     stack: Vec<&'a T>,
 }
 impl<'a, T> Iterator for Iter<'a, T> {
@@ -109,7 +107,7 @@ impl<'a, T> Iterator for Iter<'a, T> {
     }
 }
 
-struct IterMut<'a, T: 'a> {
+pub struct IterMut<'a, T: 'a> {
     stack: Vec<&'a mut T>,
 }
 impl<'a, T> Iterator for IterMut<'a, T> {

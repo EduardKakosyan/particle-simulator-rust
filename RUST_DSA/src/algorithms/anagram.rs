@@ -55,7 +55,6 @@ pub fn anagram_solution1(s1: &str, s2: &str) -> bool {
 
 /// ## Solution 2 - sort the strings in ascending order and check if they are the same
 /// Big O of nlogn
-
 pub fn anagram_solution2(s1: &str, s2: &str) -> bool {
     if s1.len() != s2.len() {
         return false;

@@ -4,6 +4,7 @@ mod algorithms;
 
 use algorithms::anagram::{anagram_solution1, anagram_solution2};
 use algorithms::dec_to_binary::{base_converter, dec_to_binary};
+use algorithms::expression_converter::postfix_convert;
 use algorithms::par_checker::par_checker;
 use algorithms::stack::Stack;
 
@@ -53,4 +54,15 @@ fn main() {
     let bin_str: String = base_converter(num1, 2);
     let hex_str: String = base_converter(num2, 16);
     println!("{num1} = b{bin_str}, {num2} = x{hex_str}");
+
+    // postfix converter
+    let postfix_string = postfix_convert("A+B-C");
+    match postfix_string {
+        Some(val) => {
+            println!("{val}");
+        }
+        None => {
+            println!("not correct string");
+        }
+    }
 }

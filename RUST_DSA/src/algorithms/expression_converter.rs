@@ -1,55 +1,39 @@
 use super::stack::Stack;
 use std::collections::HashMap;
 
-pub fn postfix_convert(expr: &str) -> Option<String> {
-    let mut op_stack = Stack::new();
-    let mut postfix_list = Vec::new();
+fn do_calc(op: &str, op1: i32, op2: i32) -> i32 {
+    if "+" == op {
+        op1 + op2
+    } else if "-" == op {
+        op1 - op2
+    } else if "*" == op {
+        op1 * op2
+    } else if "/" == op {
+        if 0 == op2 {
+            panic!("ZeroDivisionError: Invalid operation!");
+        }
+        op1 / op2
+    } else {
+        panic!("OperationError: Invalid operator {:?}", op);
+    }
+}
 
-    let mut src_str = Vec::new();
-    for c in expr.chars() {
-        src_str.push(c);
+pub fn postfix_convert(expr: &str) -> Option<i32> {
+    if expr.len() < 5 {
+        return None;
     }
 
-    let mut operators = HashMap::new();
-    operators.insert('(', 1);
-    operators.insert(')', 1);
-
-    operators.insert('+', 2);
-    operators.insert('-', 2);
-
-    operators.insert('*', 3);
-    operators.insert('/', 3);
-
-    for token in src_str {
-        if token == '(' {
-            op_stack.push(token);
-        } else if (token >= 'A' && token <= 'Z') || (token >= '0' && token <= '9') {
-            postfix_list.push(token);
-        } else if token == ')' {
-            let mut top = op_stack.pop().unwrap();
-            while top != '(' {
-                postfix_list.push(top);
-                top = op_stack.pop().unwrap();
-            }
+    let mut ops = Stack::new();
+    for token in expr.split_whitespace() {
+        if ("0".."9").contains(&token) {
+            ops.push(token.parse::<i32>().unwrap())
         } else {
-            while (!op_stack.is_empty())
-                && (operators[op_stack.peek().unwrap()] >= operators[&token])
-            {
-                postfix_list.push(op_stack.pop().unwrap());
-            }
-            op_stack.push(token);
+            let op2 = ops.pop().unwrap();
+            let op1 = ops.pop().unwrap();
+            let res = do_calc(token, op1, op2);
+            ops.push(res);
         }
     }
 
-    while !op_stack.is_empty() {
-        postfix_list.push(op_stack.pop().unwrap())
-    }
-
-    let mut postfix_str = "".to_string();
-    for c in postfix_list {
-        postfix_str += &c.to_string();
-        postfix_str += " ";
-    }
-
-    Some(postfix_str)
+    Some(ops.pop().unwrap())
 }

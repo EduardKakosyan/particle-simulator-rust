@@ -56,7 +56,7 @@ fn main() {
     println!("{num1} = b{bin_str}, {num2} = x{hex_str}");
 
     // postfix converter
-    let postfix_string = postfix_convert("A+B-C");
+    let postfix_string = postfix_convert("1 2 + 1 2 + *");
     match postfix_string {
         Some(val) => {
             println!("{val}");

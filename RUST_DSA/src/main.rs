@@ -4,6 +4,7 @@ mod algorithms;
 
 use algorithms::anagram::{anagram_solution1, anagram_solution2};
 use algorithms::dec_to_binary::{base_converter, dec_to_binary};
+use algorithms::deque::Deque;
 use algorithms::expression_converter::postfix_convert;
 use algorithms::hotpotato::hot_potato;
 use algorithms::par_checker::par_checker;
@@ -107,4 +108,16 @@ fn main() {
     let name = vec!["Mon", "Tom", "Kew", "Lisa", "Marry", "Bob"];
     let survivor = hot_potato(name, 8);
     println!("The survivor is {survivor}");
+
+    // deque
+    let mut d = Deque::new(4);
+    let _r1 = d.add_front(1);
+    let _r2 = d.add_front(2);
+    let _r3 = d.add_front(3);
+    let _r4 = d.add_front(4);
+
+    match d.remove_rear() {
+        Some(data) => println!("remove rear data {data}"),
+        None => println!("empty deque"),
+    }
 }

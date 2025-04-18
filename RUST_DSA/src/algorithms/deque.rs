@@ -1,22 +1,34 @@
+//! Deque Data structure
+/// ALllows items to be added or removed from both ends. This flexibility makes it a hybrid linear
+/// structure.
+/// Includes:
+/// new() - creates new deque stacked with no arguments and returns an empty deque
+/// add_front(item) - adds an item to the front
+/// add_rear(item) - adds an item to the rear
+/// remove_front(item) - removes an item from the front
+/// remove_rear(item) - removes an item from the rear
+/// is_empty() - checks if it is empty
+/// size() - returns the lengths of the deque
+/// iter() - iterator (immutable)
+/// iter_mut() - iterator (mutable)
+/// into_iter() - changes the deque into an iterable from
 #[allow(dead_code)]
-/// Implementing Queue data structure in Rust
-/// it is done with just a Vec with 2 pointers at the front and back
 #[derive(Debug)]
-pub struct Queue<T> {
+pub struct Deque<T> {
     cap: usize,
     data: Vec<T>,
 }
 
-impl<T> Queue<T> {
-    pub fn new(size: usize) -> Self {
+impl<T> Deque<T> {
+    pub fn new(_cap: usize) -> Self {
         Self {
-            cap: size,
-            data: Vec::with_capacity(size),
+            cap: _cap,
+            data: Vec::with_capacity(_cap),
         }
     }
 
     pub fn is_empty(&self) -> bool {
-        0 == Self::len(&self)
+        0 == self.len()
     }
 
     pub fn is_full(&self) -> bool {
@@ -31,21 +43,40 @@ impl<T> Queue<T> {
         self.data = Vec::with_capacity(self.cap);
     }
 
-    pub fn enqueue(&mut self, val: T) -> Result<(), String> {
+    pub fn add_front(&mut self, val: T) -> Result<(), String> {
         if self.len() == self.cap {
             return Err("No space available".to_string());
         }
+        self.data.push(val);
+        Ok(())
+    }
 
+    pub fn add_rear(&mut self, val: T) -> Result<(), String> {
+        if self.len() == self.cap {
+            return Err("No space available".to_string());
+        }
         self.data.insert(0, val);
         Ok(())
     }
 
-    pub fn dequeue(&mut self) -> Option<T> {
-        if !self.is_empty() {
+    pub fn remove_front(&mut self) -> Option<T> {
+        if self.len() > 0 {
             self.data.pop()
         } else {
             None
         }
+    }
+
+    pub fn remove_rear(&mut self) -> Option<T> {
+        if self.len() > 0 {
+            Some(self.data.remove(0))
+        } else {
+            None
+        }
+    }
+
+    pub fn into_iter(self) -> IntoIter<T> {
+        IntoIter(self)
     }
 
     pub fn iter(&self) -> Iter<T> {
@@ -62,17 +93,18 @@ impl<T> Queue<T> {
         for item in self.data.iter_mut() {
             iterator.stack.push(item);
         }
+
         iterator
     }
 }
 
-impl<T> Default for Queue<T> {
+impl<T> Default for Deque<T> {
     fn default() -> Self {
         Self::new(1)
     }
 }
 
-pub struct IntoIter<T>(Queue<T>);
+pub struct IntoIter<T>(Deque<T>);
 impl<T: Clone> Iterator for IntoIter<T> {
     type Item = T;
     fn next(&mut self) -> Option<Self::Item> {
@@ -90,7 +122,7 @@ pub struct Iter<'a, T: 'a> {
 impl<'a, T> Iterator for Iter<'a, T> {
     type Item = &'a T;
     fn next(&mut self) -> Option<Self::Item> {
-        if !self.stack.is_empty() {
+        if 0 != self.stack.len() {
             Some(self.stack.remove(0))
         } else {
             None
@@ -104,10 +136,19 @@ pub struct IterMut<'a, T: 'a> {
 impl<'a, T> Iterator for IterMut<'a, T> {
     type Item = &'a mut T;
     fn next(&mut self) -> Option<Self::Item> {
-        if !self.stack.is_empty() {
+        if 0 != self.stack.len() {
             Some(self.stack.remove(0))
         } else {
             None
         }
+    }
+}
+
+impl<T> IntoIterator for Deque<T> {
+    type Item = T;
+    type IntoIter = std::vec::IntoIter<T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.data.into_iter()
     }
 }

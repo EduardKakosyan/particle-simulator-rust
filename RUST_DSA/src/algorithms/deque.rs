@@ -39,6 +39,10 @@ impl<T> Deque<T> {
         self.data.len()
     }
 
+    pub fn size(&self) -> usize {
+        self.data.len()
+    }
+
     pub fn clear(&mut self) {
         self.data = Vec::with_capacity(self.cap);
     }

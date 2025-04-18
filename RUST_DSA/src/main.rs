@@ -8,6 +8,7 @@ use algorithms::deque::Deque;
 use algorithms::expression_converter::postfix_convert;
 use algorithms::hotpotato::hot_potato;
 use algorithms::par_checker::par_checker;
+use algorithms::polindrome::palindrome_checker;
 use algorithms::queue::Queue;
 use algorithms::stack::Stack;
 
@@ -120,4 +121,9 @@ fn main() {
         Some(data) => println!("remove rear data {data}"),
         None => println!("empty deque"),
     }
+
+    // polindrome checker
+    let pal = "rustsur";
+    let is_pal = palindrome_checker(pal);
+    println!("{pal} is palindrome string: {is_pal}");
 }

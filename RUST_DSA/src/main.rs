@@ -5,7 +5,9 @@ mod algorithms;
 use algorithms::anagram::{anagram_solution1, anagram_solution2};
 use algorithms::dec_to_binary::{base_converter, dec_to_binary};
 use algorithms::expression_converter::postfix_convert;
+use algorithms::hotpotato::hot_potato;
 use algorithms::par_checker::par_checker;
+use algorithms::queue::Queue;
 use algorithms::stack::Stack;
 
 fn main() {
@@ -65,4 +67,44 @@ fn main() {
             println!("not correct string");
         }
     }
+
+    // queue function
+    basic_queue();
+    iter();
+    fn basic_queue() {
+        let mut q = Queue::new(4);
+        let _r1 = q.enqueue(1);
+        let _r2 = q.enqueue(2);
+        let _r3 = q.enqueue(3);
+        let _r4 = q.enqueue(4);
+
+        if let Err(error) = q.enqueue(5) {
+            println!("Enqueue error: {error}");
+        }
+
+        if let Some(data) = q.dequeue() {
+            println!("dequeue data: {data}");
+        } else {
+            println!("empty queue");
+        }
+    }
+    fn iter() {
+        let mut q = Queue::new(4);
+        let _r1 = q.enqueue(1);
+        let _r2 = q.enqueue(2);
+        let _r3 = q.enqueue(3);
+        let _r4 = q.enqueue(4);
+        let sum1 = q.iter().sum::<i32>();
+        let mut addend = 0;
+        for item in q.iter_mut() {
+            *item += 1;
+            addend += 1;
+        }
+        println!("{sum1} + {addend}");
+    }
+
+    // hotpotato tester
+    let name = vec!["Mon", "Tom", "Kew", "Lisa", "Marry", "Bob"];
+    let survivor = hot_potato(name, 8);
+    println!("The survivor is {survivor}");
 }

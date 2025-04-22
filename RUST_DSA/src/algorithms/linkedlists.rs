@@ -103,13 +103,13 @@ impl<T> List<T> {
         IntoIter(self)
     }
 
-    fn iter(&self) -> Iter<T> {
+    pub fn iter(&self) -> Iter<T> {
         Iter {
             next: self.head.as_deref(),
         }
     }
 
-    fn iter_mut(&mut self) -> IterMut<T> {
+    pub fn iter_mut(&mut self) -> IterMut<T> {
         IterMut {
             next: self.head.as_deref_mut(),
         }

@@ -7,8 +7,8 @@ use algorithms::dec_to_binary::{base_converter, dec_to_binary};
 use algorithms::deque::Deque;
 use algorithms::expression_converter::postfix_convert;
 use algorithms::hotpotato::hot_potato;
+use algorithms::linkedlists::List;
 use algorithms::par_checker::par_checker;
-use algorithms::polindrome::palindrome_checker;
 use algorithms::queue::Queue;
 use algorithms::stack::Stack;
 
@@ -122,8 +122,14 @@ fn main() {
         None => println!("empty deque"),
     }
 
-    // polindrome checker
-    let pal = "rustsur";
-    let is_pal = palindrome_checker(pal);
-    println!("{pal} is palindrome string: {is_pal}");
+    let mut list = List::new();
+    list.push(1);
+    list.push(2);
+    list.push(3);
+
+    let mut iter = list.iter_mut();
+    assert_eq!(iter.next(), Some(&mut 3));
+    assert_eq!(iter.next(), Some(&mut 2));
+    assert_eq!(iter.next(), Some(&mut 1));
+    assert_eq!(iter.next(), None);
 }

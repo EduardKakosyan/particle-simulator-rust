@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 //! Deque Data structure
 /// ALllows items to be added or removed from both ends. This flexibility makes it a hybrid linear
 /// structure.
@@ -64,7 +65,7 @@ impl<T> Deque<T> {
     }
 
     pub fn remove_front(&mut self) -> Option<T> {
-        if self.len() > 0 {
+        if !self.is_empty() {
             self.data.pop()
         } else {
             None
@@ -72,7 +73,7 @@ impl<T> Deque<T> {
     }
 
     pub fn remove_rear(&mut self) -> Option<T> {
-        if self.len() > 0 {
+        if !self.is_empty() {
             Some(self.data.remove(0))
         } else {
             None
@@ -126,7 +127,7 @@ pub struct Iter<'a, T: 'a> {
 impl<'a, T> Iterator for Iter<'a, T> {
     type Item = &'a T;
     fn next(&mut self) -> Option<Self::Item> {
-        if 0 != self.stack.len() {
+        if !self.stack.is_empty() {
             Some(self.stack.remove(0))
         } else {
             None
@@ -140,7 +141,7 @@ pub struct IterMut<'a, T: 'a> {
 impl<'a, T> Iterator for IterMut<'a, T> {
     type Item = &'a mut T;
     fn next(&mut self) -> Option<Self::Item> {
-        if 0 != self.stack.len() {
+        if !self.stack.is_empty() {
             Some(self.stack.remove(0))
         } else {
             None

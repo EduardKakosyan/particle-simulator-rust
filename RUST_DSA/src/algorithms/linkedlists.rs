@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 //! # Linked List Abstract Data Type
 //!
 //! This module defines a singly linked list as an abstract data type (ADT).

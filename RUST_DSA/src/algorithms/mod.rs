@@ -7,6 +7,7 @@ pub mod deque;
 pub mod expression_converter;
 pub mod hotpotato;
 pub mod linkedlists;
+pub mod list_stack;
 pub mod par_checker;
 pub mod polindrome;
 pub mod queue;

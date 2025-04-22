@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use super::queue::Queue;
 /// implementing the hot potato problem or Josephus problem
 /// using queues in rust

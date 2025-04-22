@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use super::deque::Deque;
 pub fn palindrome_checker(pal: &str) -> bool {
     let mut d = Deque::new(pal.len());

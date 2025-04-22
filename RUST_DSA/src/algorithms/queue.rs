@@ -1,4 +1,4 @@
-#[allow(dead_code)]
+#![allow(dead_code)]
 /// Implementing Queue data structure in Rust
 /// it is done with just a Vec with 2 pointers at the front and back
 #[derive(Debug)]
@@ -16,7 +16,7 @@ impl<T> Queue<T> {
     }
 
     pub fn is_empty(&self) -> bool {
-        0 == Self::len(&self)
+        0 == self.len()
     }
 
     pub fn is_full(&self) -> bool {

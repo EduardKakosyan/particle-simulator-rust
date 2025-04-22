@@ -1,5 +1,4 @@
 use super::stack::Stack;
-use std::collections::HashMap;
 
 fn do_calc(op: &str, op1: i32, op2: i32) -> i32 {
     if "+" == op {

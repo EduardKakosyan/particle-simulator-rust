@@ -37,6 +37,10 @@
 //!
 //! `Link<num>` in examples refers to a pointer to the node containing `num`, with
 //! the left-most node always being the current head.
+/// In rust `Box<T>` is a smart pointer that allocated to the heap
+/// instead of the stack this is useful when you don't want to place
+/// huge objects with unknown size (dynamic) on the stack to avoid
+/// overflow.
 type Link<T> = Option<Box<Node<T>>>;
 pub struct List<T> {
     size: usize,
@@ -95,7 +99,7 @@ impl<T> List<T> {
         self.head.as_mut().map(|node| &mut node.elem)
     }
 
-    fn into_iter(self) -> IntoIter<T> {
+    pub fn into_iter(self) -> IntoIter<T> {
         IntoIter(self)
     }
 
